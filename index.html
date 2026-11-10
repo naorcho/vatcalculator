@@ -3,13 +3,136 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VAT Calculator</title>
-<style>body{font:16px/1.6 -apple-system,system-ui,sans-serif;max-width:720px;margin:0 auto;padding:24px 16px;color:#1c1c1e}h1{font-size:28px}</style>
+<title>VAT Calculator: Any Country</title>
+<meta name="description" content="Add or remove VAT, GST or sales tax in one tap. Tax rates for 69 countries, every Canadian province and US state. 11 languages. Free for iPhone and Android.">
+<meta property="og:title" content="VAT Calculator: Any Country">
+<meta property="og:description" content="Add or remove VAT, GST or sales tax in one tap. 69 countries, 11 languages.">
+<meta property="og:image" content="https://naorcho.github.io/vatcalculator/img/og.jpg">
+<meta property="og:url" content="https://naorcho.github.io/vatcalculator/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a84ff">
+<link rel="icon" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<style>
+:root{--bg:#fff;--text:#1c1c1e;--muted:#5f6368;--card:#f2f4f8;--line:#e3e6ec;--accent:#0a84ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--text:#f2f2f7;--muted:#a1a1aa;--card:#171c24;--line:#262c36;--accent:#4da3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 ui-rounded,-apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.hero{background:linear-gradient(160deg,#0a84ff 0%,#0040c8 100%);color:#fff;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center;padding-top:64px;padding-bottom:0}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.brand img{width:64px;height:64px;border-radius:15px;box-shadow:0 6px 18px rgba(0,20,80,.35)}
+.brand span{font-weight:700;font-size:20px}
+h1{font-size:clamp(36px,5.4vw,58px);line-height:1.08;margin:0 0 18px;letter-spacing:-.5px}
+h1 em{font-style:normal;color:#ffd60a}
+.lead{font-size:20px;color:#dbe9ff;margin:0 0 30px;max-width:520px}
+.badges{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px}
+.badge{display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;text-decoration:none;border:1px solid #a6a6a6;border-radius:10px;padding:8px 18px 8px 14px;min-width:178px;height:56px}
+.badge svg{flex:none}
+.badge small{display:block;font-size:11px;line-height:1.1;letter-spacing:.2px}
+.badge b{display:block;font-size:21px;line-height:1.1;font-weight:600;letter-spacing:-.2px}
+.badge:hover{background:#1c1c1e}
+.phone{justify-self:center;align-self:end;width:300px;max-width:78vw;height:560px;overflow:hidden;border-radius:44px 44px 0 0;background:#0b0b0d;padding:11px 11px 0;box-shadow:0 30px 70px rgba(0,10,60,.5)}
+.phone img{display:block;width:100%;border-radius:34px 34px 0 0}
+section{padding:72px 0 0}
+
+h2{font-size:32px;line-height:1.2;margin:0 0 10px;letter-spacing:-.3px}
+.sub{color:var(--muted);margin:0 0 32px;max-width:640px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.card .i{width:42px;height:42px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700;font-size:18px;margin-bottom:14px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15.5px}
+.shots{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px}
+.shots figure{margin:0;flex:0 0 220px;scroll-snap-align:start}
+.shots img{width:100%;border-radius:24px;border:1px solid var(--line);display:block}
+.shots figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:10px}
+.langs{display:flex;flex-wrap:wrap;gap:8px}
+.langs span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:15px}
+.note{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;color:var(--muted);font-size:15.5px}
+.note b{color:var(--text)}
+footer{margin-top:72px;border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer nav a{margin-right:18px}
+@media (max-width:820px){
+  .hero .wrap{grid-template-columns:1fr;text-align:center;padding-top:44px}
+  .brand,.badges{justify-content:center}
+  .lead{margin-left:auto;margin-right:auto}
+  .badges{margin-bottom:40px}
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .phone{width:260px;height:400px}
+  h2{font-size:27px}
+}
+</style>
 </head>
 <body>
-<h1>VAT Calculator</h1>
-<p>Add or remove VAT, GST or sales tax in one tap, with tax rates for 69 countries, Canadian provinces and US states. Available in 11 languages.</p>
-<p>Not a government app: not affiliated with any government or tax authority. <a href="sources.html">Official sources for every rate</a>.</p>
-<p><a href="sources.html">Sources</a> · <a href="support.html">Support</a> · <a href="privacy.html">Privacy policy</a></p>
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="brand"><img src="img/icon-256.png" alt="VAT Calculator app icon"><span>VAT Calculator</span></div>
+      <h1>Add or remove VAT.<br><em>One tap.</em></h1>
+      <p class="lead">Type a price and instantly see the amount before tax, the tax and the total, with the right rate for your country, state or province.</p>
+      <div class="badges">
+        <a class="badge" href="https://apps.apple.com/app/id6829728531" aria-label="Download on the App Store">
+          <svg width="26" height="30" viewBox="0 0 814 1000" aria-hidden="true"><path fill="#fff" d="M788 341c-6 4-108 62-108 190 0 149 131 201 135 203-1 3-21 72-69 143-43 62-88 124-157 124s-87-40-166-40c-77 0-104 41-167 41s-107-57-157-127C40 793 0 680 0 573c0-172 112-263 222-263 59 0 107 39 144 39 35 0 90-41 157-41 26 0 117 2 177 89zM554 159c27-33 47-79 47-124 0-6-1-13-2-18-44 2-97 30-129 67-25 28-48 74-48 120 0 7 1 14 2 16 3 1 8 1 12 1 40 0 90-27 118-62z"/></svg>
+          <span><small>Download on the</small><b>App Store</b></span>
+        </a>
+        <a class="badge" href="https://play.google.com/store/apps/details?id=com.appngo.vatcalculator" aria-label="Get it on Google Play">
+          <svg width="26" height="28" viewBox="0 0 512 545" aria-hidden="true"><path fill="#00d7fe" d="M17 10C8 19 3 34 3 53v439c0 19 5 34 14 43l3 2 246-246v-6L20 8z"/><path fill="#ffce00" d="M348 373l-82-82v-6l82-82 2 1 97 55c28 16 28 42 0 58l-97 55z"/><path fill="#ff3a44" d="M350 372l-84-84L17 537c9 10 25 11 42 1z"/><path fill="#00f076" d="M350 204L59 39C42 29 26 30 17 40l249 248z"/></svg>
+          <span><small>GET IT ON</small><b>Google Play</b></span>
+        </a>
+      </div>
+    </div>
+    <div class="phone"><img src="img/home.jpg" alt="VAT Calculator showing a price before tax, the VAT and the total" width="460" height="1000"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Made for your country</h2>
+    <p class="sub">The right rate is picked from your phone's region. Change it any time, or type your own.</p>
+    <div class="grid">
+      <div class="card"><div class="i">69</div><h3>69 countries built in</h3><p>VAT and GST rates, including reduced rates such as Germany 19% / 7%.</p></div>
+      <div class="card"><div class="i">CA</div><h3>Canada, line by line</h3><p>GST, PST, QST and HST for every province, each shown on its own line.</p></div>
+      <div class="card"><div class="i">US</div><h3>Every US state</h3><p>State sales tax, plus a custom rate for your city or county.</p></div>
+      <div class="card"><div class="i">⇄</div><h3>Works both ways</h3><p>Start from a price before tax, or from a price that already includes it.</p></div>
+      <div class="card"><div class="i">1,2</div><h3>Your number format</h3><p>1,234.56 or 1.234,56, and 0 to 3 decimal places.</p></div>
+      <div class="card"><div class="i">✓</div><h3>No account</h3><p>Nothing to sign up for. Everything stays on your phone.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>See it in action</h2>
+    <p class="sub">Big, clear numbers, a full-size keypad, light and dark mode.</p>
+    <div class="shots">
+      <figure><img src="img/home.jpg" alt="Calculator with Israeli VAT" loading="lazy" width="460" height="1000"><figcaption>Results as you type</figcaption></figure>
+      <figure><img src="img/canada.jpg" alt="Quebec GST and QST shown separately" loading="lazy" width="460" height="1000"><figcaption>GST, PST, QST and HST</figcaption></figure>
+      <figure><img src="img/settings.jpg" alt="Settings with country and state" loading="lazy" width="460" height="1000"><figcaption>Country, state or custom rate</figcaption></figure>
+      <figure><img src="img/dark.jpg" alt="Dark mode with German number format" loading="lazy" width="460" height="1000"><figcaption>Dark mode</figcaption></figure>
+      <figure><img src="img/languages.jpg" alt="The app in Hebrew" loading="lazy" width="460" height="1000"><figcaption>11 languages</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>In your language</h2>
+    <p class="sub">With right-to-left layout for Hebrew and Arabic.</p>
+    <div class="langs">
+      <span>English</span><span>עברית</span><span>العربية</span><span>Español</span><span>Français</span><span>Deutsch</span><span>Português</span><span>Русский</span><span>中文</span><span>日本語</span><span>हिन्दी</span>
+    </div>
+  </section>
+
+  <section>
+    <p class="note"><b>Not a government app.</b> VAT Calculator is not affiliated with, endorsed by or acting for any government or tax authority. Rates are for guidance and may change; check with your local tax authority. <a href="sources.html">Official sources for every rate</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav><a href="support.html">Support</a><a href="privacy.html">Privacy policy</a><a href="sources.html">Sources</a></nav>
+    <span>© 2026 Naor Melamed</span>
+  </div>
+</footer>
 </body>
 </html>
